@@ -1,7 +1,6 @@
-//import PropTypes from 'prop-types';
 import { DeleteButton, Li } from './ContactList.Styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from 'components/redux/items';
+import { deleteContact } from 'redux/items';
 
 const ContactList = () => {
   const value = useSelector(state => state.filter.value);
@@ -9,7 +8,7 @@ const ContactList = () => {
   const dispartch = useDispatch();
 
   const getVisibleContacts = () => {
-    if (contacts.length !== []) {
+    if (contacts !== []) {
       const notmalisedFilter = value.toLowerCase();
       const visibleContacts = contacts.filter(contact =>
         contact.name.toLowerCase().includes(notmalisedFilter)

@@ -7,7 +7,7 @@ import {
   ButtonSubmit,
   TitleInput,
 } from './ContactForm.Styled';
-import { addContacts } from 'components/redux/items';
+import { addContacts } from 'redux/items';
 import { useSelector, useDispatch } from 'react-redux';
 
 const ContactForm = () => {
@@ -20,17 +20,22 @@ const ContactForm = () => {
       return contact.name.toLowerCase() === values.name.toLowerCase();
     });
 
+    const resetForm = () => {
+      values.name = '';
+      values.number = '';
+    };
+
     if (!found) {
       dispatch(addContacts(newContact));
+      resetForm();
     } else {
       alert(`${values.name} is already in contacts`);
     }
   };
 
-  const handleSubmit = async (value, { setSubmitting, resetForm }) => {
+  const handleSubmit = async (value, { setSubmitting }) => {
     await addContact(value, shortid.generate());
     setSubmitting(false);
-    resetForm();
   };
 
   return (
