@@ -1,33 +1,42 @@
 import shortid from 'shortid';
-//import PropTypes from 'prop-types';
 import { Formik } from 'formik';
+import Notiflix from 'notiflix';
 import {
   FormStyled,
   FieldStyled,
   ButtonSubmit,
   TitleInput,
 } from './ContactForm.Styled';
-import { addContacts } from 'redux/items';
 import { useSelector, useDispatch } from 'react-redux';
+import { getContacts, addContacts } from 'redux/contacts/contactsOperations';
+import { useEffect } from 'react';
+import { selectContacts } from 'redux/contacts/contactsSelector';
+
+const nameId = shortid();
+const phoneId = shortid();
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
+
+  useEffect(() => {
+    dispatch(getContacts());
+  }, [dispatch]);
+
+  const contacts = useSelector(selectContacts);
 
   const addContact = (values, id) => {
     const newContact = { id, ...values };
     const found = contacts.some(function (contact) {
       return contact.name.toLowerCase() === values.name.toLowerCase();
     });
-
     const resetForm = () => {
       values.name = '';
-      values.number = '';
+      values.phone = '';
     };
-
     if (!found) {
       dispatch(addContacts(newContact));
       resetForm();
+      Notiflix.Notify.success('Сontact added successfully');
     } else {
       alert(`${values.name} is already in contacts`);
     }
@@ -37,14 +46,14 @@ const ContactForm = () => {
     await addContact(value, shortid.generate());
     setSubmitting(false);
   };
-
   return (
-    <Formik initialValues={{ name: '', number: '' }} onSubmit={handleSubmit}>
+    <Formik initialValues={{ name: '', phone: '' }} onSubmit={handleSubmit}>
       {({ isSubmitting }) => (
         <FormStyled>
-          <label>
+          <label htmlFor={nameId}>
             <TitleInput>Name</TitleInput>
             <FieldStyled
+              id={nameId}
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -52,11 +61,12 @@ const ContactForm = () => {
               required
             />
           </label>
-          <label>
-            <TitleInput>Number</TitleInput>
+          <label htmlFor={phoneId}>
+            <TitleInput>Phone</TitleInput>
             <FieldStyled
+              id={phoneId}
               type="text"
-              name="number"
+              name="phone"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
