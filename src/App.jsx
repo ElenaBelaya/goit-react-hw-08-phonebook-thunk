@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 import Layout from './components/Layout/Layout';
+import { useDispatch } from 'react-redux';
+import authOperations from 'redux/auth/auth-operations';
 
 const createViews = componentName => {
   return lazy(() => {
@@ -14,6 +16,10 @@ const LoginView = createViews('LoginView');
 const RegisterView = createViews('RegisterView');
 
 export const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(authOperations.currentUser());
+  }, [dispatch]);
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
