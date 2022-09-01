@@ -1,54 +1,51 @@
 import shortid from 'shortid';
+import { useDispatch } from 'react-redux';
+import { Formik } from 'formik';
 import { FormBox, Main, Label, Button, Input } from './RegisterView.Styled';
+import authOperations from '../redux/auth/auth-operations';
 
 const nameId = shortid();
 const emailId = shortid();
 const passwordId = shortid();
 
 const RegisterView = () => {
-  const handleSubmit = e => {
-    e.preventDefault();
+  const dispatch = useDispatch();
+
+  const handleSubmit = (credentials, { resetForm }) => {
+    dispatch(authOperations.register(credentials));
+
+    resetForm({ values: '' });
   };
-  const handleChange = ({ target: { name, email, password } }) => {
-    console.log(name);
-    console.log(email);
-    console.log(password);
-  };
+
   return (
     <Main>
-      <FormBox onSubmit={handleSubmit} autoComplete="off">
-        <Label htmlFor={nameId}>
-          name
-          <Input
-            onChange={handleChange}
-            id={nameId}
-            type="text"
-            name="name"
-            value=""
-          ></Input>
-        </Label>
-        <Label htmlFor={emailId}>
-          mail
-          <Input
-            onChange={handleChange}
-            id={emailId}
-            type="email"
-            name="email"
-            value=""
-          ></Input>
-        </Label>
-        <Label htmlFor={passwordId}>
-          password
-          <Input
-            onChange={handleChange}
-            id={passwordId}
-            type="password"
-            name="password"
-            value=""
-          ></Input>
-        </Label>
-        <Button type="submit">Submit</Button>
-      </FormBox>
+      <Formik
+        initialValues={{ name: '', email: '', password: '' }}
+        onSubmit={handleSubmit}
+      >
+        <FormBox autoComplete="off">
+          <Label htmlFor={nameId}>
+            name
+            <Input
+              id={nameId}
+              type="text"
+              name="name"
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+            ></Input>
+          </Label>
+          <Label htmlFor={emailId}>
+            mail
+            <Input id={emailId} type="email" name="email" required></Input>
+          </Label>
+          <Label htmlFor={passwordId}>
+            password
+            <Input id={passwordId} type="password" name="password"></Input>
+          </Label>
+          <Button type="submit">Submit</Button>
+        </FormBox>
+      </Formik>
     </Main>
   );
 };

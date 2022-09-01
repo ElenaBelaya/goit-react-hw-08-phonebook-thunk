@@ -1,45 +1,42 @@
 import shortid from 'shortid';
+import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import authOperations from 'redux/auth/auth-operations';
 import { FormBox, Main, Label, Input, Button } from './LoginView.Styled';
 
 const emailId = shortid();
 const passwordId = shortid();
 
 const LoginView = () => {
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
-
-  const handleChange = ({ target: { email, password } }) => {
-    console.log(email);
-    console.log(password);
+  const dispatch = useDispatch();
+  const handleSubmit = (credentials, { resetForm }) => {
+    dispatch(authOperations.logIn(credentials));
+    resetForm({ values: '' });
   };
 
   return (
     <Main>
-      <FormBox onSubmit={handleSubmit} autoComplete="off">
-        <Label htmlFor={emailId}>
-          mail
-          <Input
-            id={emailId}
-            onChange={handleChange}
-            type="email"
-            name="email"
-            value=""
-          ></Input>
-        </Label>
-        <Label htmlFor={passwordId}>
-          password
-          <Input
-            id={passwordId}
-            onChange={handleChange}
-            type="password"
-            name="password"
-            value=""
-          ></Input>
-        </Label>
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <FormBox autoComplete="off">
+            <Label htmlFor={emailId}>
+              mail
+              <Input id={emailId} type="email" name="email" />
+            </Label>
+            <Label htmlFor={passwordId}>
+              password
+              <Input id={passwordId} type="password" name="password" />
+            </Label>
 
-        <Button type="submit">Submit</Button>
-      </FormBox>
+            <Button type="submit" disabled={isSubmitting}>
+              Submit
+            </Button>
+          </FormBox>
+        )}
+      </Formik>
     </Main>
   );
 };

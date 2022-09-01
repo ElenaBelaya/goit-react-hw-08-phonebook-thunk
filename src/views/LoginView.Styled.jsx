@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
-export const FormBox = styled.form`
+import { Form, Field } from 'formik';
+
+export const FormBox = styled(Form)`
   display: inline-flex;
   flex-direction: column;
   border: 3px solid #ea9999;
@@ -22,7 +24,7 @@ export const Label = styled.label`
   color: #795151;
 `;
 
-export const Input = styled.input`
+export const Input = styled(Field)`
   margin-left: 10px;
   border: none;
   border-radius: 4px;

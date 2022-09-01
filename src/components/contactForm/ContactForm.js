@@ -25,6 +25,7 @@ const ContactForm = () => {
   const contacts = useSelector(selectContacts);
 
   const addContact = (values, id) => {
+    console.log(values);
     const newContact = { id, ...values };
     const found = contacts.some(function (contact) {
       return contact.name.toLowerCase() === values.name.toLowerCase();
