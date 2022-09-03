@@ -3,6 +3,8 @@ import { lazy, useEffect } from 'react';
 import Layout from './components/Layout/Layout';
 import { useDispatch } from 'react-redux';
 import authOperations from 'redux/auth/auth-operations';
+import { PrivateRoute } from 'components/userMenu/PrivateRoute';
+import { PublicRoute } from 'components/userMenu/PublicRoute';
 
 const createViews = componentName => {
   return lazy(() => {
@@ -24,9 +26,13 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="contacts" element={<ContactsView />} />
-        <Route path="login" element={<LoginView />} />
-        <Route path="register" element={<RegisterView />} />
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="contacts" element={<ContactsView />} />
+        </Route>
+        <Route path="/" element={<PublicRoute />}>
+          <Route path="login" element={<LoginView />} />
+          <Route path="register" element={<RegisterView />} />
+        </Route>
       </Route>
     </Routes>
   );

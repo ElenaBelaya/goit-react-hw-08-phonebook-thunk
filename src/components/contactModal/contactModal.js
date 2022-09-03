@@ -1,53 +1,15 @@
-import shortid from 'shortid';
 import { Formik } from 'formik';
-import Notiflix from 'notiflix';
-import {
-  FormStyled,
-  FieldStyled,
-  ButtonSubmit,
-  TitleInput,
-} from './ContactForm.Styled';
+import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import contactsOperations from 'redux/contacts/contactsOperations';
-import { useEffect } from 'react';
-import { selectContacts } from 'redux/contacts/contactsSelector';
 
-const nameId = shortid();
-const phoneId = shortid();
-
-const ContactForm = () => {
+const editContact = () => {
   const dispatch = useDispatch();
-  const { getContacts, addContacts } = contactsOperations;
-
-  useEffect(() => {
-    dispatch(getContacts());
-  }, [dispatch, getContacts]);
-  const contacts = useSelector(selectContacts);
-
-  const addContact = (values, id) => {
-    const newContact = { id, ...values };
-    const found = contacts.some(function (contact) {
-      return contact.name.toLowerCase() === values.name.toLowerCase();
-    });
-    const resetForm = () => {
-      values.name = '';
-      values.number = '';
-    };
-    if (!found) {
-      dispatch(addContacts(newContact));
-      resetForm();
-      Notiflix.Notify.success('Сontact added successfully');
-    } else {
-      alert(`${values.name} is already in contacts`);
-    }
-  };
-
-  const handleSubmit = async (value, { setSubmitting }) => {
-    await addContact(value, shortid.generate());
-    setSubmitting(false);
-  };
+  const { updateContacts } = contactsOperations;
+  const CloseModal = () => Navigate('/contacts');
+  const updateContact = async values => {};
   return (
-    <Formik initialValues={{ name: '', number: '' }} onSubmit={handleSubmit}>
+    <Formik initialValues={{ name: '', number: '' }} onSubmit={updateContact}>
       {({ isSubmitting }) => (
         <FormStyled>
           <label htmlFor={nameId}>
@@ -74,12 +36,13 @@ const ContactForm = () => {
           </label>
           <br />
           <ButtonSubmit type="submit" disabled={isSubmitting}>
-            Add contact
+            Save
           </ButtonSubmit>
+          <button onClick={CloseModal}>Close</button>
         </FormStyled>
       )}
     </Formik>
   );
 };
 
-export default ContactForm;
+export default editContact;

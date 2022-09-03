@@ -7,7 +7,7 @@ const Filter = () => {
   const dispartch = useDispatch();
   const value = useSelector(selectFilter);
   const onFilterContacts = event => {
-    console.log(event.currentTarget.value);
+    //console.log(event.currentTarget.value);
     dispartch(setFilter(event.currentTarget.value));
   };
   return (

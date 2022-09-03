@@ -24,7 +24,7 @@ const Layout = () => {
         <Navigation>
           <div>
             <Link to="/">Home</Link>
-            <Link to="/contacts">Contacts</Link>
+            {isLoggedIn && <Link to="/contacts">Contacts</Link>}
           </div>
           {isLoggedIn ? (
             <UserMenu>

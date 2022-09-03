@@ -1,7 +1,7 @@
 import * as contactsAPI from './contactsAPI';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const getContacts = createAsyncThunk(
+const getContacts = createAsyncThunk(
   'contacts/getContacts',
   async (_, { rejectWithValue }) => {
     try {
@@ -13,9 +13,10 @@ export const getContacts = createAsyncThunk(
   }
 );
 
-export const addContacts = createAsyncThunk(
+const addContacts = createAsyncThunk(
   'contacts/addContacts',
   async (contact, { rejectWithValue }) => {
+    console.log(contact);
     try {
       await contactsAPI.addContacts(contact);
       const contacts = await contactsAPI.getContacts();
@@ -26,11 +27,21 @@ export const addContacts = createAsyncThunk(
   }
 );
 
-export const removeContacts = createAsyncThunk(
-  'contacts/removeContacts',
-  async id => {
+const removeContacts = createAsyncThunk('contacts/removeContacts', async id => {
+  try {
+    await contactsAPI.removeContacts(id);
+    const contacts = await contactsAPI.getContacts();
+    return contacts;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+const updateContacts = createAsyncThunk(
+  'contacts/updateContacts',
+  async (id, contact) => {
     try {
-      await contactsAPI.removeContacts(id);
+      await contactsAPI.updateContacts(id, contact);
       const contacts = await contactsAPI.getContacts();
       return contacts;
     } catch (error) {
@@ -38,3 +49,12 @@ export const removeContacts = createAsyncThunk(
     }
   }
 );
+
+const contactsOperations = {
+  getContacts,
+  addContacts,
+  removeContacts,
+  updateContacts,
+};
+
+export default contactsOperations;

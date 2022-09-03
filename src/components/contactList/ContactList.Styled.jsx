@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const DeleteButton = styled.button`
-  margin-left: 10px;
+  margin: 0px 10px;
 `;
 
 export const Li = styled.li`
