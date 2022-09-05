@@ -17,7 +17,7 @@ export const removeContacts = async id => {
   return responce.data;
 };
 
-export const updateContacts = async (id, contact) => {
-  const responce = await axios.patch(`contacts/${id}`, contact);
+export const updateContacts = async ({ id, name, number }) => {
+  const responce = await axios.patch(`contacts/${id}`, { name, number });
   return responce.data;
 };

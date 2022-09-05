@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import authOperations from 'redux/auth/auth-operations';
 import { PrivateRoute } from 'components/userMenu/PrivateRoute';
 import { PublicRoute } from 'components/userMenu/PublicRoute';
+import ModalOpen from 'views/ModalOpen';
 
 const createViews = componentName => {
   return lazy(() => {
@@ -28,6 +29,7 @@ export const App = () => {
         <Route index element={<HomePage />} />
         <Route path="/" element={<PrivateRoute />}>
           <Route path="contacts" element={<ContactsView />} />
+          <Route path="contacts/:modalId" element={<ModalOpen />} />
         </Route>
         <Route path="/" element={<PublicRoute />}>
           <Route path="login" element={<LoginView />} />

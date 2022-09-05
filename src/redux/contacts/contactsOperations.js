@@ -16,7 +16,6 @@ const getContacts = createAsyncThunk(
 const addContacts = createAsyncThunk(
   'contacts/addContacts',
   async (contact, { rejectWithValue }) => {
-    console.log(contact);
     try {
       await contactsAPI.addContacts(contact);
       const contacts = await contactsAPI.getContacts();
@@ -39,10 +38,11 @@ const removeContacts = createAsyncThunk('contacts/removeContacts', async id => {
 
 const updateContacts = createAsyncThunk(
   'contacts/updateContacts',
-  async (id, contact) => {
+  async newContact => {
     try {
-      await contactsAPI.updateContacts(id, contact);
+      await contactsAPI.updateContacts(newContact);
       const contacts = await contactsAPI.getContacts();
+
       return contacts;
     } catch (error) {
       console.log(error);

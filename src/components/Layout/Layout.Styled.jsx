@@ -28,19 +28,32 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #eac9e7;
 `;
 export const Button = styled.button`
-  padding: 1px 5px;
+  padding: 8px 15px;
   margin-left: 15px;
+  border: 1px solid;
+  border-radius: 5px;
+  background-color: #5f1640;
+  opacity: 0.7;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
 `;
 export const Navigation = styled.nav`
   display: flex;
   justify-content: space-between;
   padding: 0px 20px;
-  width: calc(50%);
+  width: 100%;
 `;
 
 export const UserMenu = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const Text = styled.span`
+  font-weight: 500;
+  font-size: 18px;
 `;

@@ -8,6 +8,7 @@ import {
   Button,
   Navigation,
   UserMenu,
+  Text,
 } from './Layout.Styled';
 import Loader from '../loader/Loader';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,7 +29,7 @@ const Layout = () => {
           </div>
           {isLoggedIn ? (
             <UserMenu>
-              <span>Wellcome, {name}</span>
+              <Text>Wellcome, {name}</Text>
               <Button
                 type="button"
                 onClick={() => dispatch(authOperations.logOut())}
