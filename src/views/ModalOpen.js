@@ -2,12 +2,13 @@ import shortid from 'shortid';
 import { Formik } from 'formik';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import {
   FormStyled,
   FieldStyled,
-  ButtonSubmit,
   TitleInput,
+  Layout,
 } from './ModalOpen.styled';
 import contactsOperations from 'redux/contacts/contactsOperations';
 
@@ -36,44 +37,59 @@ const ModalOpen = () => {
   };
 
   return (
-    <Formik
-      initialValues={{ name: previousName, number: previousNumber }}
-      onSubmit={updateContact}
-    >
-      {({ isSubmitting }) => (
-        <FormStyled>
-          <label htmlFor={nameId}>
-            <TitleInput>Name</TitleInput>
-            <FieldStyled
-              id={nameId}
-              type="text"
-              name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-            />
-          </label>
-          <label htmlFor={phoneId}>
-            <TitleInput>Phone</TitleInput>
-            <FieldStyled
-              id={phoneId}
-              type="text"
-              name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-            />
-          </label>
-          <br />
-          <ButtonSubmit type="submit" disabled={isSubmitting}>
-            Save
-          </ButtonSubmit>
-          <button type="button" onClick={() => onClose()}>
-            Close
-          </button>
-        </FormStyled>
-      )}
-    </Formik>
+    <Layout>
+      <Formik
+        initialValues={{ name: previousName, number: previousNumber }}
+        onSubmit={updateContact}
+      >
+        {({ isSubmitting }) => (
+          <FormStyled>
+            <label htmlFor={nameId}>
+              <TitleInput>Name</TitleInput>
+              <FieldStyled
+                id={nameId}
+                type="text"
+                name="name"
+                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                required
+              />
+            </label>
+            <label htmlFor={phoneId}>
+              <TitleInput>Phone</TitleInput>
+              <FieldStyled
+                id={phoneId}
+                type="text"
+                name="number"
+                pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                required
+              />
+            </label>
+            <br />
+            <Stack spacing={7} direction="row" justifyContent="center">
+              <Button
+                size="small"
+                type="submit"
+                variant="contained"
+                color="secondary"
+                disabled={isSubmitting}
+              >
+                Save
+              </Button>
+              <Button
+                size="small"
+                variant="contained"
+                type="button"
+                onClick={() => onClose()}
+              >
+                Close
+              </Button>
+            </Stack>
+          </FormStyled>
+        )}
+      </Formik>
+    </Layout>
   );
 };
 

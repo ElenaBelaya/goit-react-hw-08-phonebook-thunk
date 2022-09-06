@@ -1,5 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
+import Avatar from '@mui/material/Avatar';
+import user from '../static/images/website.jpg';
 import { Container } from 'components/section/Section.styled';
 import {
   Link,
@@ -14,6 +16,7 @@ import Loader from '../loader/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import authSelectors from 'redux/auth/auth-selectors';
 import authOperations from 'redux/auth/auth-operations';
+
 const Layout = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
@@ -29,6 +32,7 @@ const Layout = () => {
           </div>
           {isLoggedIn ? (
             <UserMenu>
+              <Avatar alt="User1" src={user} />
               <Text>Wellcome, {name}</Text>
               <Button
                 type="button"

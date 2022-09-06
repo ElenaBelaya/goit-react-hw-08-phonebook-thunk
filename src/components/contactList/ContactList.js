@@ -1,4 +1,4 @@
-import { Li } from './ContactList.Styled';
+import { Li, List } from './ContactList.Styled';
 import { useSelector } from 'react-redux';
 import { selectContacts, selectFilter } from 'redux/contacts/contactsSelector';
 import ContactItem from '../contactItem/ContactItem';
@@ -16,13 +16,13 @@ const ContactList = () => {
   };
 
   return contacts !== [] && contacts !== undefined ? (
-    <ul>
+    <List>
       {getVisibleContacts().map(contact => (
         <Li key={contact.id}>
           <ContactItem contact={contact} />
         </Li>
       ))}
-    </ul>
+    </List>
   ) : (
     <span>There are no contacts</span>
   );

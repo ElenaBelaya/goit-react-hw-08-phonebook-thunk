@@ -10,11 +10,13 @@ export const FormBox = styled(Form)`
   padding: 30px;
   margin: 30px 10px;
   text-align: start;
-  background-color: #f8dfdf; ;
+  background-color: #f8dfdf;
+  width: 50%;
 `;
 
 export const Main = styled.main`
   text-align: center;
+  background-color: #eac9e7;
 `;
 
 export const Label = styled.label`
@@ -28,6 +30,8 @@ export const Input = styled(Field)`
   margin-left: 10px;
   border: none;
   border-radius: 4px;
+  height: 25px;
+  width: 80%;
 `;
 
 export const Button = styled.button`

@@ -5,9 +5,13 @@ export const Container = styled.div`
 `;
 
 export const SectionBox = styled.section`
-  padding: 20px 0px;
+  display: flex;
+  padding: 20px 200px;
+  flex-direction: column;
+  background-color: #eac9e7;
 `;
 
 export const Title = styled.h2`
   font-weight: 500;
+  margin-left: 20px;
 `;

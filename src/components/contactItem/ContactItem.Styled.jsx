@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
+// import styled from '@emotion/styled';
 
-export const DeleteButton = styled.button`
-  margin: 0px 10px;
-`;
+// export const DeleteButton = styled.button`
+//   margin: 0px 10px;
+// `;

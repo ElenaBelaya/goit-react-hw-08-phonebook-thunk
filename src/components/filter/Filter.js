@@ -7,7 +7,6 @@ const Filter = () => {
   const dispartch = useDispatch();
   const value = useSelector(selectFilter);
   const onFilterContacts = event => {
-    //console.log(event.currentTarget.value);
     dispartch(setFilter(event.currentTarget.value));
   };
   return (
@@ -15,6 +14,7 @@ const Filter = () => {
       Find contacts by name
       <FilterInput
         type="text"
+        placeholder="Who your want to find?"
         value={value}
         onChange={onFilterContacts}
       ></FilterInput>

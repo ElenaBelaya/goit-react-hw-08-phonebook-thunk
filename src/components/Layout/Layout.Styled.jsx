@@ -13,7 +13,7 @@ export const Link = styled(NavLink)`
   padding: 5px 12px;
   font-weight: 500;
   color: #2a363b;
-  font-size: 18px;
+  font-size: 24px;
 
   &.active {
     color: #b00b69;
@@ -55,5 +55,5 @@ export const UserMenu = styled.div`
 
 export const Text = styled.span`
   font-weight: 500;
-  font-size: 18px;
+  font-size: 24px;
 `;

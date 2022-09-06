@@ -23,6 +23,8 @@ const contactsSlice = createSlice({
     },
     [contactsOperations.removeContacts.fulfilled](state, action) {
       state.items = action.payload;
+      state.isLoading = false;
+      state.error = null;
     },
     [contactsOperations.updateContacts.fulfilled](state, action) {
       state.items = action.payload;

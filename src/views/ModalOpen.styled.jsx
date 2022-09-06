@@ -1,11 +1,19 @@
 import { Form, Field } from 'formik';
 import styled from '@emotion/styled';
 
+export const Layout = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eac9e7;
+  padding: 20px;
+`;
 export const FormStyled = styled(Form)`
   display: flex;
   flex-direction: column;
   border: 1px solid #000000;
-  width: 50%;
+  border-radius: 5px;
+  width: 30%;
   padding: 10px;
 `;
 
@@ -14,11 +22,10 @@ export const FieldStyled = styled(Field)`
   display: inline-block;
   width: 200px;
   margin-bottom: 15px;
-`;
-
-export const ButtonSubmit = styled('button')`
-  display: inline-block;
-  width: 120px;
+  height: 25px;
+  border-radius: 3px;
+  border: none;
+  width: 95%;
 `;
 
 export const TitleInput = styled('p')`

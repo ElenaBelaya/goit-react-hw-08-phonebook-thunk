@@ -1,11 +1,23 @@
-import { DeleteButton } from './ContactItem.Styled';
+//import { DeleteButton } from './ContactItem.Styled';
 import Notiflix from 'notiflix';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+//import Icon from '@material-ui/core/Icon';
 import contactsOperations from 'redux/contacts/contactsOperations';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+//import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 const ContactItem = contact => {
+  const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id, name, number } = contact.contact;
@@ -18,22 +30,31 @@ const ContactItem = contact => {
 
   return (
     <>
-      {name}: {number}
-      <DeleteButton type="button" onClick={() => onDeleteContact(id)}>
-        <AiFillDelete />
+      <b>{name}:</b> {number}
+      <Button
+        size="small"
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        startIcon={<DeleteIcon />}
+        onClick={() => onDeleteContact(id)}
+      >
         Delete
-      </DeleteButton>
-      <button
-        type="button"
+      </Button>
+      <Button
+        size="small"
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<CloudUploadIcon />}
         onClick={() =>
           navigate(`/contacts/${id}`, {
             state: { id: id, name: name, number: number },
           })
         }
       >
-        <AiFillEdit />
         Edit
-      </button>
+      </Button>
     </>
   );
 };
