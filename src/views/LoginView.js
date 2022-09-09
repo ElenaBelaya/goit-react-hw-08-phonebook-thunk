@@ -9,13 +9,11 @@ const emailId = shortid();
 const passwordId = shortid();
 
 const LoginView = () => {
-  //const error = useSelector(authSelectors.getError);
-  //const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-  const token = useSelector(authSelectors.getToken);
+  const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
   const handleSubmit = (credentials, { resetForm }) => {
     dispatch(authOperations.logIn(credentials));
-    if (!token) {
+    if (error) {
       return alert('Please try again');
     } else {
       resetForm({ values: '' });

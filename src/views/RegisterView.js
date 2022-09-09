@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import { FormBox, Main, Label, Button, Input } from './RegisterView.Styled';
 import authOperations from '../redux/auth/auth-operations';
@@ -11,13 +11,13 @@ const passwordId = shortid();
 
 const RegisterView = () => {
   const dispatch = useDispatch();
-  const token = authSelectors.getToken;
+  const error = useSelector(authSelectors.getError);
   const handleSubmit = (credentials, { resetForm }) => {
     dispatch(authOperations.register(credentials));
-    if (token !== null) {
-      resetForm({ values: '' });
+    if (error) {
+      return alert('Еhis name already exists. Please try again');
     } else {
-      return alert('Please try again');
+      resetForm({ values: '' });
     }
   };
 

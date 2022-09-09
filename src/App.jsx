@@ -1,9 +1,8 @@
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { lazy, useEffect, Suspense } from 'react';
 import Layout from './components/Layout/Layout';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import authOperations from 'redux/auth/auth-operations';
-import authSelectors from 'redux/auth/auth-selectors';
 import { PrivateRoute } from 'components/userMenu/PrivateRoute';
 import { PublicRoute } from 'components/userMenu/PublicRoute';
 import ModalOpen from 'views/ModalOpen';
@@ -22,17 +21,10 @@ const RegisterView = createViews('RegisterView');
 const NotFoundView = createViews('NotFoundView');
 
 export const App = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isFetchingCurrentUser = useSelector(
-    authSelectors.getisFetchingCurrentUser
-  );
-
   const dispatch = useDispatch();
-  //console.log(location.pathname);
+
   useEffect(() => {
     dispatch(authOperations.currentUser());
-    //navigate(location.pathname);
   }, [dispatch]);
   return (
     <Suspense

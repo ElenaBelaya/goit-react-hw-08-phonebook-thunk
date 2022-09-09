@@ -6,7 +6,7 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshingCurrentUser: false,
-  error: false,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -14,47 +14,50 @@ const authSlice = createSlice({
   initialState,
   extraReducers: {
     [authOperations.register.pending](state) {
-      state.error = false;
+      state.error = null;
     },
     [authOperations.register.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
-      state.error = false;
+      state.error = action.payload;
     },
-    [authOperations.register.rejected](state) {
-      state.error = true;
+    [authOperations.register.rejected](state, action) {
+      state.error = action.payload;
     },
     [authOperations.logIn.pending](state) {
       state.isLoggedIn = false;
-      state.error = false;
+      state.token = null;
+      state.error = null;
     },
     [authOperations.logIn.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
-      state.error = false;
+      state.error = action.payload;
     },
-    [authOperations.logIn.rejected](state) {
-      state.error = true;
+    [authOperations.logIn.rejected](state, action) {
       state.isLoggedIn = false;
+      state.error = action.payload;
     },
-    [authOperations.logOut.fulfilled](state) {
+    [authOperations.logOut.fulfilled](state, action) {
       state.user = { name: null, email: null };
-      state.token = null;
       state.isLoggedIn = false;
+      state.error = action.payload;
     },
     [authOperations.currentUser.pending](state) {
       state.isRefreshingCurrentUser = false;
+      state.error = null;
     },
     [authOperations.currentUser.fulfilled](state, action) {
       state.user = action.payload;
       state.isLoggedIn = true;
       state.isRefreshingCurrentUser = true;
+      state.error = action.payload;
     },
-    [authOperations.currentUser.rejected](state) {
+    [authOperations.currentUser.rejected](state, action) {
       state.isRefreshingCurrentUser = false;
-      state.error = true;
+      state.error = action.payload;
     },
   },
 });
