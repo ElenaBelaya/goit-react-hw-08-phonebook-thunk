@@ -12,12 +12,10 @@ const passwordId = shortid();
 const RegisterView = () => {
   const dispatch = useDispatch();
   const error = useSelector(authSelectors.getError);
-  const handleSubmit = (credentials, { resetForm }) => {
+  const handleSubmit = credentials => {
     dispatch(authOperations.register(credentials));
     if (error) {
       return alert('Еhis name already exists. Please try again');
-    } else {
-      resetForm({ values: '' });
     }
   };
 

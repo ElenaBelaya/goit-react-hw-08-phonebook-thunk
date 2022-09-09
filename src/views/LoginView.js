@@ -11,12 +11,10 @@ const passwordId = shortid();
 const LoginView = () => {
   const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
-  const handleSubmit = (credentials, { resetForm }) => {
+  const handleSubmit = credentials => {
     dispatch(authOperations.logIn(credentials));
     if (error) {
       return alert('Please try again');
-    } else {
-      resetForm({ values: '' });
     }
   };
 
