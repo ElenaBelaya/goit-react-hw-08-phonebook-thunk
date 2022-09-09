@@ -16,7 +16,7 @@ export const Link = styled(NavLink)`
   font-size: 24px;
 
   &.active {
-    color: #b00b69;
+    color: #2c37bf;
   }
 `;
 
@@ -28,7 +28,7 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #eac9e7;
+  background-color: #e2ecff;
 `;
 export const Button = styled.button`
   padding: 8px 15px;
@@ -40,6 +40,7 @@ export const Button = styled.button`
   color: #ffffff;
   font-weight: 500;
   font-size: 14px;
+  cursor: pointer;
 `;
 export const Navigation = styled.nav`
   display: flex;

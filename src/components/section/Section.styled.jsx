@@ -8,7 +8,7 @@ export const SectionBox = styled.section`
   display: flex;
   padding: 20px 200px;
   flex-direction: column;
-  background-color: #eac9e7;
+  background-color: #c5d9ff;
 `;
 
 export const Title = styled.h2`

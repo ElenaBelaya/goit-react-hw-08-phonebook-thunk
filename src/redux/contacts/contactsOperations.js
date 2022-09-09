@@ -26,26 +26,28 @@ const addContacts = createAsyncThunk(
   }
 );
 
-const removeContacts = createAsyncThunk('contacts/removeContacts', async id => {
-  try {
-    await contactsAPI.removeContacts(id);
-    const contacts = await contactsAPI.getContacts();
-    return contacts;
-  } catch (error) {
-    console.log(error);
+const removeContacts = createAsyncThunk(
+  'contacts/removeContacts',
+  async (id, { rejectWithValue }) => {
+    try {
+      await contactsAPI.removeContacts(id);
+      const contacts = await contactsAPI.getContacts();
+      return contacts;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
-});
+);
 
 const updateContacts = createAsyncThunk(
   'contacts/updateContacts',
-  async newContact => {
+  async (newContact, { rejectWithValue }) => {
     try {
       await contactsAPI.updateContacts(newContact);
       const contacts = await contactsAPI.getContacts();
-
       return contacts;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error);
     }
   }
 );

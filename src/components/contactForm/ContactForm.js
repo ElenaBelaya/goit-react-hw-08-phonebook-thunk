@@ -39,6 +39,7 @@ const ContactForm = () => {
     if (!found) {
       dispatch(addContacts(newContact));
       resetForm();
+
       Notiflix.Notify.success('Сontact added successfully');
     } else {
       alert(`${values.name} is already in contacts`);

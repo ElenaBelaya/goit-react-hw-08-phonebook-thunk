@@ -1,7 +1,7 @@
 import shortid from 'shortid';
 import { Formik } from 'formik';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import {
@@ -11,11 +11,13 @@ import {
   Layout,
 } from './ModalOpen.styled';
 import contactsOperations from 'redux/contacts/contactsOperations';
+import { selectContacts } from 'redux/contacts/contactsSelector';
 
 const nameId = shortid();
 const phoneId = shortid();
 
 const ModalOpen = () => {
+  const contacts = useSelector(selectContacts);
   const location = useLocation();
   const id = location.state.id;
   const previousName = location.state.name;
@@ -31,9 +33,15 @@ const ModalOpen = () => {
 
   const updateContact = async contact => {
     const newContact = { id, ...contact };
-
-    dispatch(updateContacts(newContact));
-    onClose();
+    const found = contacts.some(function (contact) {
+      return contact.name.toLowerCase() === newContact.name.toLowerCase();
+    });
+    if (!found) {
+      dispatch(updateContacts(newContact));
+      onClose();
+    } else {
+      alert(`${newContact.name} is already in contacts`);
+    }
   };
 
   return (

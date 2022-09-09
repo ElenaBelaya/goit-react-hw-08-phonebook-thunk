@@ -43,4 +43,5 @@ export const Button = styled.button`
   color: #795151;
   font-family: Segoe UI;
   font-size: 16px;
+  cursor: pointer;
 `;

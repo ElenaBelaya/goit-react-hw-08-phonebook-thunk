@@ -8,7 +8,6 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import contactsOperations from 'redux/contacts/contactsOperations';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-//import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 
 const useStyles = makeStyles(theme => ({
   button: {

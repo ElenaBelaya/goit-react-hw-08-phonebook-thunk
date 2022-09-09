@@ -1,4 +1,4 @@
-import { Box, Text, Small } from './HomePage.Styled';
+import { Box, Text, Small } from './HomeView.Styled';
 
 const HomePage = () => {
   return (

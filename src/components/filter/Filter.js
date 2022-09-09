@@ -14,7 +14,7 @@ const Filter = () => {
       Find contacts by name
       <FilterInput
         type="text"
-        placeholder="Who your want to find?"
+        placeholder="Who do your want to find?"
         value={value}
         onChange={onFilterContacts}
       ></FilterInput>

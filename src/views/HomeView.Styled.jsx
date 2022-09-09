@@ -22,7 +22,7 @@ export const Text = styled.p`
 
 export const Small = styled.span`
   font-size: 100px;
-  font-family: lobster;
+  font-family: lobster, Roboto;
   margin: 0px;
   color: #5f1640;
 `;
