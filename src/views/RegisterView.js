@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import { FormBox, Main, Label, Button, Input } from './RegisterView.Styled';
 import authOperations from '../redux/auth/auth-operations';
+import authSelectors from 'redux/auth/auth-selectors';
 
 const nameId = shortid();
 const emailId = shortid();
@@ -10,11 +11,14 @@ const passwordId = shortid();
 
 const RegisterView = () => {
   const dispatch = useDispatch();
-
+  const token = authSelectors.getToken;
   const handleSubmit = (credentials, { resetForm }) => {
     dispatch(authOperations.register(credentials));
-
-    resetForm({ values: '' });
+    if (token !== null) {
+      resetForm({ values: '' });
+    } else {
+      return alert('Please try again');
+    }
   };
 
   return (

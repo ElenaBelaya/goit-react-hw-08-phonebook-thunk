@@ -26,7 +26,8 @@ const authSlice = createSlice({
       state.error = true;
     },
     [authOperations.logIn.pending](state) {
-      state.error = true;
+      state.isLoggedIn = false;
+      state.error = false;
     },
     [authOperations.logIn.fulfilled](state, action) {
       state.user = action.payload.user;
@@ -36,6 +37,7 @@ const authSlice = createSlice({
     },
     [authOperations.logIn.rejected](state) {
       state.error = true;
+      state.isLoggedIn = false;
     },
     [authOperations.logOut.fulfilled](state) {
       state.user = { name: null, email: null };

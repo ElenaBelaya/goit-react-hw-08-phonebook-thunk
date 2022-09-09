@@ -9,14 +9,15 @@ const emailId = shortid();
 const passwordId = shortid();
 
 const LoginView = () => {
-  const error = useSelector(authSelectors.getError);
-
+  //const error = useSelector(authSelectors.getError);
+  //const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+  const token = useSelector(authSelectors.getToken);
   const dispatch = useDispatch();
   const handleSubmit = (credentials, { resetForm }) => {
-    if (!error) {
-      return alert('error');
+    dispatch(authOperations.logIn(credentials));
+    if (!token) {
+      return alert('Please try again');
     } else {
-      dispatch(authOperations.logIn(credentials));
       resetForm({ values: '' });
     }
   };
@@ -38,9 +39,7 @@ const LoginView = () => {
               <Input id={passwordId} type="password" name="password" />
             </Label>
 
-            <Button type="submit" disabled={isSubmitting}>
-              Submit
-            </Button>
+            <Button type="submit">Submit</Button>
           </FormBox>
         )}
       </Formik>
