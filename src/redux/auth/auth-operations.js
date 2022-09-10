@@ -19,7 +19,7 @@ const register = createAsyncThunk('auth/register', async credentials => {
     return data;
   } catch (error) {
     //return rejectWithValue(error.message);
-    return alert(`rejectWithValue(error.message). Please try again`);
+    return alert(`Please try again`);
   }
 });
 const logIn = createAsyncThunk('auth/login', async credentials => {
