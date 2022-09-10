@@ -12,34 +12,27 @@ const token = {
   },
 };
 
-const register = createAsyncThunk(
-  'auth/register',
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.post('/users/signup', credentials);
-      token.set(data.token);
-      return data;
-    } catch (error) {
-      //return rejectWithValue(error.message);
-      const errorMessage = rejectWithValue(error.message);
-      return alert(`${errorMessage}. Please try again`);
-    }
+const register = createAsyncThunk('auth/register', async credentials => {
+  try {
+    const { data } = await axios.post('/users/signup', credentials);
+    token.set(data.token);
+    return data;
+  } catch (error) {
+    //return rejectWithValue(error.message);
+    return alert(`rejectWithValue(error.message). Please try again`);
   }
-);
-const logIn = createAsyncThunk(
-  'auth/login',
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.post('/users/login', credentials);
-      token.set(data.token);
-      return data;
-    } catch (error) {
-      //return rejectWithValue(error.message);
-      const errorMessage = rejectWithValue(error.message);
-      return alert(`${errorMessage}. Please try again`);
-    }
+});
+const logIn = createAsyncThunk('auth/login', async credentials => {
+  try {
+    const { data } = await axios.post('/users/login', credentials);
+    token.set(data.token);
+    return data;
+  } catch (error) {
+    //return rejectWithValue(error.message);
+
+    return alert(`Please try again`);
   }
-);
+});
 
 const logOut = createAsyncThunk(
   'auth/logout',
