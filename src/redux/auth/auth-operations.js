@@ -20,7 +20,9 @@ const register = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      //return rejectWithValue(error.message);
+      const errorMessage = rejectWithValue(error.message);
+      return alert(`${errorMessage}. Please try again`);
     }
   }
 );
@@ -32,7 +34,9 @@ const logIn = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      //return rejectWithValue(error.message);
+      const errorMessage = rejectWithValue(error.message);
+      return alert(`${errorMessage}. Please try again`);
     }
   }
 );

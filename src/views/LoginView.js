@@ -1,21 +1,21 @@
 import shortid from 'shortid';
 import { Formik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import authOperations from 'redux/auth/auth-operations';
-import authSelectors from 'redux/auth/auth-selectors';
+// import authSelectors from 'redux/auth/auth-selectors';
 import { FormBox, Main, Label, Input, Button } from './LoginView.Styled';
 
 const emailId = shortid();
 const passwordId = shortid();
 
 const LoginView = () => {
-  const error = useSelector(authSelectors.getError);
+  // const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
   const handleSubmit = credentials => {
     dispatch(authOperations.logIn(credentials));
-    if (error) {
-      return alert('Please try again');
-    }
+    // if (error) {
+    //   return alert('Please try again');
+    // }
   };
 
   return (
